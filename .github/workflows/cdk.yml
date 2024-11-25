@@ -8,6 +8,7 @@ jobs:
   build-and-deploy:
     name: CDK Build and Deploy
     runs-on: ubuntu-latest
+    secrets: inherit
     permissions:
       id-token: write
       contents: read
