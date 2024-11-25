@@ -8,7 +8,6 @@ jobs:
   build-and-deploy:
     name: CDK Build and Deploy
     runs-on: ubuntu-latest
-    secrets: inherit
     permissions:
       id-token: write
       contents: read
@@ -17,9 +16,11 @@ jobs:
         name: Checkout Repository
       
       - name: Print the Docker Hub username (masked)
+        secrets: inherit
         run: echo "Docker Hub Username ${{ secrets.DOCKERHUB_USERNAME }}"
       
       - name: Validate Docker Hub username
+        secrets: inherit
         run: |
           if [ -z "${{ secrets.DOCKERHUB_USERNAME }}" ]; then
             echo "DOCKERHUB_USERNAME secret is not set or is empty."
