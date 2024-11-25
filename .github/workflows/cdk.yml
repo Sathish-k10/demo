@@ -1,0 +1,36 @@
+# .github/workflows/cdk.yml
+name: CDK Build and Deploy
+
+on:
+  workflow_call:
+
+jobs:
+  build-and-deploy:
+    name: CDK Build and Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout Repository
+      
+      - name: Print the Docker Hub username (masked)
+        run: echo "Docker Hub Username ${{ secrets.DOCKERHUB_USERNAME }}"
+      
+      - name: Validate Docker Hub username
+        run: |
+          if [ -z "${{ secrets.DOCKERHUB_USERNAME }}" ]; then
+            echo "DOCKERHUB_USERNAME secret is not set or is empty."
+            exit 1
+          else
+            echo "DOCKERHUB_USERNAME secret is set."
+          fi
+      - name: Debug Docker Hub Username
+        run: |
+          echo "Secret length: ${#secrets.DOCKERHUB_USERNAME}" # Prints the length of the secret
+          echo "First character: ${secrets.DOCKERHUB_USERNAME:0:1}" # Outputs only a single character
+
+
+      
+

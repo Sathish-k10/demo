@@ -1,0 +1,11 @@
+# .github/workflows/development.yml
+name: Production
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - sathish
+jobs:
+  deploy-to-development:
+    uses: ./.github/workflows/cdk.yml
+            
