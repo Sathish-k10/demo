@@ -3,6 +3,9 @@ name: CDK Build and Deploy
 
 on:
   workflow_call:
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
 
 jobs:
   build-and-deploy:
@@ -16,11 +19,9 @@ jobs:
         name: Checkout Repository
       
       - name: Print the Docker Hub username (masked)
-        secrets: inherit
         run: echo "Docker Hub Username ${{ secrets.DOCKERHUB_USERNAME }}"
       
       - name: Validate Docker Hub username
-        secrets: inherit
         run: |
           if [ -z "${{ secrets.DOCKERHUB_USERNAME }}" ]; then
             echo "DOCKERHUB_USERNAME secret is not set or is empty."
