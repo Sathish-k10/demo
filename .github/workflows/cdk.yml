@@ -1,0 +1,38 @@
+# .github/workflows/cdk.yml
+name: CDK Build and Deploy
+
+on:
+  workflow_call:
+    inputs:
+      PROJECT_ENVIRONMENT:
+        type: string
+        required: true
+      PROJECT_NAME:
+        type: string
+        required: true
+      AWS_REGION:
+        type: string
+        required: true
+      WORKING_DIR:
+        type: string
+        required: true
+      GIT_HASH:
+        type: string
+        required: true
+
+jobs:
+  build-and-deploy:
+    name: CDK Build and Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout Repository
+      
+      - name: Print the Docker Hub username (masked)
+        run: echo "Docker Hub Username ${{ secrets.DOCKERHUB_USERNAME }}"
+
+      
+
