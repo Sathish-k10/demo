@@ -26,6 +26,11 @@ jobs:
           else
             echo "DOCKERHUB_USERNAME secret is set."
           fi
+      - name: Debug Docker Hub Username
+        run: |
+          echo "Secret length: ${#secrets.DOCKERHUB_USERNAME}" # Prints the length of the secret
+          echo "First character: ${secrets.DOCKERHUB_USERNAME:0:1}" # Outputs only a single character
+
 
       
 
